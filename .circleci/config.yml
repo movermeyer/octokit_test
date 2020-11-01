@@ -22,7 +22,7 @@ jobs:
           name: Build wheels
           command: mkdir -p wheelhouse && touch wheelhouse/hello.whl && touch wheelhouse/goodbye.whl
       - persist_to_workspace:
-          root: /root/project
+          root: /home/circleci/project
           paths:
             - wheelhouse
     docker:
