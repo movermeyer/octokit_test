@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: Build wheels
-          command: mkdir -p wheelhouse && touch wheelhouse/hello.whl && touch wheelhouse/goodbye.whl
+          command: mkdir -p wheelhouse && echo "Hello" > wheelhouse/hello.whl && echo "Goodbye" > wheelhouse/goodbye.whl
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
