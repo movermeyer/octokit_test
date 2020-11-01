@@ -19,7 +19,7 @@ jobs:
           --header 'Circle-Token: ${{ secrets.circle_token }}' \
           --header 'Content-Type: application/json' \
           --data-raw '{
-            "branch": ${{ github.event.release.tag_name }},
+            "branch": "${{ github.event.release.tag_name }}",
             "parameters": {
               "build_wheels": true
             }
