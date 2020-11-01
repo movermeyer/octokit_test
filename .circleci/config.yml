@@ -1,0 +1,39 @@
+version: 2.1
+
+parameters:
+  build_wheels:
+    type: boolean
+    default: false
+
+workflows:
+  build_wheels:
+    when: << pipeline.parameters.build_wheels >>
+    jobs:
+      - build_manylinux
+      - store_artifacts:
+          requires:
+            - build_manylinux
+
+jobs:
+  build_manylinux:
+    steps:
+      - checkout
+      - run:
+          name: Build wheels
+          command: mkdir -p wheelhouse && touch wheelhouse/hello.whl && touch wheelhouse/goodbye.whl
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - wheelhouse
+    docker:
+      - image: circleci/python:3.9
+
+  store_artifacts:
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - store_artifacts:
+          path: /tmp/workspace/wheelhouse
+          destination: wheelhouse
+    docker:
+      - image: circleci/python:3.9
