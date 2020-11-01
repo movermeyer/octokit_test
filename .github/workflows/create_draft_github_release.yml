@@ -19,3 +19,15 @@ jobs:
           release_name: ${{ github.ref }}
           draft: true
           prerelease: false
+
+      - name: Trigger wheel build
+        run: |
+          curl --location --request POST 'https://circleci.com/api/v2/project/gh/movermeyer/octokit_test/pipeline' \
+          --header 'Circle-Token: ${{ secrets.circle_token }}' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "branch": "${{ github.event.release.tag_name }}",
+            "parameters": {
+              "build_wheels": true
+            }
+          }'
