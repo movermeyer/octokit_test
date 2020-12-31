@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create GitHub release
+      - name: Create draft GitHub release
+        # Note: Creating a draft release does NOT trigger a `release` event
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
@@ -26,7 +27,7 @@ jobs:
           --header 'Circle-Token: ${{ secrets.circle_token }}' \
           --header 'Content-Type: application/json' \
           --data-raw '{
-            "branch": "${{ github.event.release.tag_name }}",
+            "branch": "${{ github.event.ref }}",
             "parameters": {
               "build_wheels": true
             }
