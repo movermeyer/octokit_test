@@ -1,0 +1,17 @@
+name: Add artifacts to GitHub draft release
+
+on:
+  repository_dispatch:
+    types: [wheel_build_complete]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download the artifacts from CircleCI
+        run: |
+          echo ${{ github.event.client_payload }}
+      - name: Upload the artifacts to the draft release
+        run: |
+          echo ${{ github.event.client_payload }}
