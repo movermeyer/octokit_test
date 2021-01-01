@@ -6,7 +6,7 @@ parameters:
     default: false
 
 orbs:
-  github-actions: movermeyer/github-actions@0.0.3
+  github-actions: movermeyer/github-actions@0.0.4
 
 workflows:
   build_wheels:
@@ -49,6 +49,5 @@ jobs:
       - github-actions/repository_dispatch:
           repo_name: "movermeyer/octokit_test"
           event_type: "wheel_build_complete"
-          github_personal_access_token: $GITHUB_PERSONAL_ACCESS_TOKEN
     docker:
       - image: circleci/python:3.9
