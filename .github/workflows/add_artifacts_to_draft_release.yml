@@ -11,9 +11,8 @@ jobs:
     steps:
       - name: Download the artifacts from CircleCI
         run: |
-          echo ${{ github.event.client_payload }} | jq '.build_num' &&
-          echo ${{ github.event.client_payload }} | jq '.build_url' &&
-          BUILD_URL=`echo ${{ github.event.client_payload }} | jq '.build_url'` &&
-          curl "${BUILD_URL}/artifact" \
+          echo ${{ github.event.client_payload.build_num }} &&
+          echo ${{ github.event.client_payload.build_url }} &&
+          curl "${{ github.event.client_payload.build_url }}/artifacts" \
           --header 'Circle-Token: ${{ secrets.circle_token }}' \
           --header 'Content-Type: application/json'
