@@ -16,7 +16,7 @@ workflows:
       - store_artifacts:
         requires:
           - build_manylinux
-      - notify_github
+      - notify_github:
         requires:
           - store_artifacts
 
