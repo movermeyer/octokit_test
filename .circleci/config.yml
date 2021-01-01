@@ -16,7 +16,8 @@ workflows:
       - store_artifacts:
           requires:
             - build_manylinux
-      - github_action_repository_dispatch:
+      - github-actions:
+        repository_dispatch:
           repo_name: "movermeyer/octokit_test"
           event_type: "wheel_build_complete"
 
