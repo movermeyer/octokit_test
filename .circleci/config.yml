@@ -14,11 +14,11 @@ workflows:
     jobs:
       - build_manylinux
       - store_artifacts:
-        requires:
-          - build_manylinux
+          requires:
+            - build_manylinux
       - notify_github:
-        requires:
-          - store_artifacts
+          requires:
+            - store_artifacts
 
 jobs:
   build_manylinux:
@@ -47,7 +47,7 @@ jobs:
   notify_github:
     steps:
       - github-actions/repository_dispatch:
-        repo_name: "movermeyer/octokit_test"
-        event_type: "wheel_build_complete"
+          repo_name: "movermeyer/octokit_test"
+          event_type: "wheel_build_complete"
     docker:
       - image: circleci/python:3.9
