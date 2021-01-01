@@ -5,6 +5,9 @@ parameters:
     type: boolean
     default: false
 
+orbs:
+  github-actions: movermeyer/github-actions@0.0.2
+
 workflows:
   build_wheels:
     when: << pipeline.parameters.build_wheels >>
@@ -13,6 +16,9 @@ workflows:
       - store_artifacts:
           requires:
             - build_manylinux
+      - github_action_repository_dispatch:
+          repo_name: "movermeyer/octokit_test"
+          event_type: "wheel_build_complete"
 
 jobs:
   build_manylinux:
