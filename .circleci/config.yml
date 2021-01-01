@@ -49,5 +49,6 @@ jobs:
       - github-actions/repository_dispatch:
           repo_name: "movermeyer/octokit_test"
           event_type: "wheel_build_complete"
+          github_personal_access_token: $GITHUB_PERSONAL_ACCESS_TOKEN
     docker:
       - image: circleci/python:3.9
