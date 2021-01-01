@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Download the artifacts from CircleCI
         run: |
-          echo ${{ github.event.client_payload }}
+          echo ${{ github.event.client_payload.build_num }}
       - name: Upload the artifacts to the draft release
         run: |
-          echo ${{ github.event.client_payload }}
+          echo ${{ github.event.client_payload.build_url }}

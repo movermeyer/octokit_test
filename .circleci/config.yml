@@ -16,9 +16,6 @@ workflows:
       - store_artifacts:
           requires:
             - build_manylinux
-      - notify_github:
-          requires:
-            - store_artifacts
 
 jobs:
   build_manylinux:
@@ -41,12 +38,9 @@ jobs:
       - store_artifacts:
           path: /tmp/workspace/wheelhouse
           destination: wheelhouse
-    docker:
-      - image: circleci/python:3.9
-
-  notify_github:
-    steps:
       - github-actions/repository_dispatch:
+          # This has to be done as part of the `store_artifacts` job, since GitHub
+          # needs this job's number in order to download the artifacts
           repo_name: "movermeyer/octokit_test"
           event_type: "wheel_build_complete"
     docker:
